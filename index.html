@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Web POKEY Lab</title>
+		<link rel="icon" type="image/png" href="favicon.png">
+		<script src="pokeylab.js"></script>
+		<style type="text/css">
+			@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+			body {
+				font-family: 'Roboto Mono';
+				font-size: 20px;
+			}
+			input, select {
+				vertical-align: middle;
+			}
+			table {
+				border-collapse: collapse;
+				border-top: 2px solid #CCC;
+				border-bottom: 2px solid #CCC;
+				width: 900px;
+			}
+			td, th { padding: 5px; }
+			.bin, .dec, .hex {
+				font-family: 'Roboto Mono';
+				font-size: 25px;
+				padding: 5px 0 5px 10px;
+				border: 1px solid #CCC;
+			}
+			th { background-color: #EEE; }
+			.bin {
+				width: 130px;
+			}
+			.hex {
+				width: 40px;
+			}
+			.dec {
+				width: 70px;
+			}
+			select {
+				font-family: 'Roboto Mono';
+				font-size: 25px;
+			}
+			.checkbox {
+				width: 25px;
+				height: 25px;
+			}
+			.hr { text-align: right; }
+			a:link, a:visited { color: #00F; text-decoration: none; }
+			a:hover, a:active { color: #08F; text-decoration: underline; }
+			button { padding: 10px; margin: 5px 5px 5px 0; }
+		</style>
+	</head>
+	<body>
+	
+	<table>
+		<tr>
+			<th>Ch</th>
+			<th>AUDF</th>
+			<th></th>
+			<th></th>
+			<th>&emsp;</th>
+			<th>AUDC</th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>POLY</th>
+			<th>VO</th>
+			<th>VOL</th>
+		</tr>
+		
+		<tr>
+			<th>1</th>
+			<td><input id="audf1_hex" type="text" class="hex" value="00" maxlength="2"/></td>
+			<td>=</td>
+			<td><input id="audf1_dec" type="number" min="0" max="255" class="dec" value="0" maxlength="3"/></td>
+			<td>&emsp;</td>
+			<td><input id="audc1_hex" type="text" class="hex" value="00" maxlength="2"/></td>
+			<td>=</td>
+			<td><input id="audc1_bin" type="text" class="bin" disabled="disabled" value="00000000" maxlength="8"/></td>
+			<td>=</td>
+			<td><select id="audc1_poly">
+				<option value="0">5+17</option>
+				<option value="1">5</option>
+				<option value="2">5+4</option>
+				<option value="3">5</option>
+				<option value="4">17</option>
+				<option value="5">None</option>
+				<option value="6">4</option>
+				<option value="7">None</option>
+			</select></td>
+			<td><input id="audc1_volonly" type="checkbox" class="checkbox" maxlength="2"/></td>
+			<td><input id="audc1_vol" type="number" class="dec" min="0" max="15" value="0" maxlength="2"/></td>
+		</tr>
+		
+		<tr>
+			<th>2</th>
+			<td><input id="audf2_hex" type="text" class="hex" value="00" maxlength="2"/></td>
+			<td>=</td>
+			<td><input id="audf2_dec" type="number" min="0" max="255" class="dec" value="0" maxlength="3"/></td>
+			<td>&emsp;</td>
+			<td><input id="audc2_hex" type="text" class="hex" value="00" maxlength="2"/></td>
+			<td>=</td>
+			<td><input id="audc2_bin" type="text" class="bin" disabled="disabled" value="00000000" maxlength="8"/></td>
+			<td>=</td>
+			<td><select id="audc2_poly">
+				<option value="0">5+17</option>
+				<option value="1">5</option>
+				<option value="2">5+4</option>
+				<option value="3">5</option>
+				<option value="4">17</option>
+				<option value="5">None</option>
+				<option value="6">4</option>
+				<option value="7">None</option>
+			</select></td>
+			<td><input id="audc2_volonly" type="checkbox" class="checkbox" maxlength="2"/></td>
+			<td><input id="audc2_vol" type="number" class="dec" min="0" max="15" value="0" maxlength="2"/></td>
+		</tr>
+		
+		<tr>
+			<th>3</th>
+			<td><input id="audf3_hex" type="text" class="hex" value="00" maxlength="2"/></td>
+			<td>=</td>
+			<td><input id="audf3_dec" type="number" min="0" max="255" class="dec" value="0" maxlength="3"/></td>
+			<td>&emsp;</td>
+			<td><input id="audc3_hex" type="text" class="hex" value="00" maxlength="2"/></td>
+			<td>=</td>
+			<td><input id="audc3_bin" type="text" class="bin" disabled="disabled" value="00000000" maxlength="8"/></td>
+			<td>=</td>
+			<td><select id="audc3_poly">
+				<option value="0">5+17</option>
+				<option value="1">5</option>
+				<option value="2">5+4</option>
+				<option value="3">5</option>
+				<option value="4">17</option>
+				<option value="5">None</option>
+				<option value="6">4</option>
+				<option value="7">None</option>
+			</select></td>
+			<td><input id="audc3_volonly" type="checkbox" class="checkbox" maxlength="2"/></td>
+			<td><input id="audc3_vol" type="number" class="dec" min="0" max="15" value="0" maxlength="2"/></td>
+		</tr>
+		
+		<tr>
+			<th>4</th>
+			<td><input id="audf4_hex" type="text" class="hex" value="00" maxlength="2"/></td>
+			<td>=</td>
+			<td><input id="audf4_dec" type="number" min="0" max="255" class="dec" value="0" maxlength="3"/></td>
+			<td>&emsp;</td>
+			<td><input id="audc4_hex" type="text" class="hex" value="00" maxlength="2"/></td>
+			<td>=</td>
+			<td><input id="audc4_bin" type="text" class="bin" disabled="disabled" value="00000000" maxlength="8"/></td>
+			<td>=</td>
+			<td><select id="audc4_poly">
+				<option value="0">5+17</option>
+				<option value="1">5</option>
+				<option value="2">5+4</option>
+				<option value="3">5</option>
+				<option value="4">17</option>
+				<option value="5">None</option>
+				<option value="6">4</option>
+				<option value="7">None</option>
+			</select></td>
+			<td><input id="audc4_volonly" type="checkbox" class="checkbox" maxlength="2"/></td>
+			<td><input id="audc4_vol" type="number" class="dec" min="0" max="15" value="0" maxlength="2"/></td>
+		</tr>
+	</table>
+	
+	<table>
+		<tr>
+			<th class="hr">AUDCTL</th>
+			<td><input id="audctl_hex" type="text" class="hex" value="00" maxlength="2"/> = <input id="audctl_bin" type="text" class="bin" disabled="disabled" value="00000000" maxlength="8"/></td>
+		</tr>
+		
+		<tr><th class="hr">Poly:</th><td><select id="audctl_poly">
+			<option value="0">17-bit</option>
+			<option value="1">9-bit</option>
+		</select></td></tr>
+
+		<tr><th class="hr">Ch.1 freq.:</th><td><select id="audctl_ch1freq">
+			<option value="0">64 kHz</option>
+			<option value="1">1.79 MHz (NTSC) / 1.77 MHz (PAL)</option>
+		</select></td></tr>
+
+		<tr><th class="hr">Ch.3 freq.:</th><td><select id="audctl_ch3freq">
+			<option value="0">64 kHz</option>
+			<option value="1">1.79 MHz (NTSC) / 1.77 MHz (PAL)</option>
+		</select></td></tr>
+
+		<tr><th class="hr">16-bit Ch.2+1:</th><td><input id="audctl_16bit21" type="checkbox" class="checkbox"></td></tr>
+		<tr><th class="hr">16-bit Ch.4+3:</th><td><input id="audctl_16bit43" type="checkbox" class="checkbox"></td></tr>
+
+		<tr><th class="hr">Filter 1 w/ 3:</th><td><input id="audctl_filter13" type="checkbox" class="checkbox"></td></tr>
+		<tr><th class="hr">Filter 2 w/ 4:</th><td><input id="audctl_filter24" type="checkbox" class="checkbox"></td></tr>
+
+		<tr><th class="hr">Frequency Divider:</th><td><select id="audctl_freq">
+			<option value="0">64 kHz</option>
+			<option value="1">15 kHz</option>
+		</select></td></tr>
+
+	</table>
+
+	<div>
+		<button id="play">PLAY</button>
+		<button id="stop">STOP</button>
+		<button id="reset">RESET</button>
+		<button id="random">RANDOM</button>
+		Powered by <a href="https://github.com/mrk-its/web-pokey">Web POKEY</a> by <a href="https://github.com/mrk-its">Mariusz Kryński (mrk)</a>
+	</div>
+	
+	</body>
+</html>
+

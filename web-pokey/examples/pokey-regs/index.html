@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Web POKEY - Registers</title>
+    <style>
+        #pokeyRegs input {
+            width: 3em
+        }
+    </style>
+    <script src='https://code.jquery.com/jquery-latest.min.js' type='text/javascript'></script>
+    <script type="module">
+        const audioContext = new AudioContext({
+            sampleRate: 56000,
+        })
+        audioContext.audioWorklet.addModule('../../pokey.js').then(() => {
+            const pokeyNode = new AudioWorkletNode(audioContext, 'POKEY')
+            pokeyNode.connect(audioContext.destination)
+
+            document.addEventListener('visibilitychange', function() {
+                document.hidden ? audioContext.suspend() : audioContext.resume()
+            });
+
+            // init ui
+
+            $('#pokeyRegs input').change(e => {
+                audioContext.resume();
+                let hash = Array.from($('#pokeyRegs input').map((i, v) => $(v).val())).join("_")
+                document.location.hash = '#' + hash
+            }).val("00")
+            $('body').click(() => audioContext.resume());
+
+            function hash_changed() {
+                let hash = document.location.hash.substring(1);
+                let regs = hash.split("_")
+                if (regs && regs.length == 9) {
+                    let msg = regs.flatMap((v, i) => [i, parseInt(v, 16), 0])
+                    $('#pokeyRegs input').map((i, v) => $(v).val(regs[i]))
+
+                    // send regs
+                    pokeyNode.port.postMessage(msg)
+                }
+            }
+            $(window).bind("hashchange", hash_changed)
+            hash_changed();
+        })
+    </script>
+</head>
+
+<body>
+    <table id="pokeyRegs">
+        <tr>
+            <td></td>
+            <th>AUDF</th>
+            <th>AUDC</th>
+        </tr>
+        <tr>
+            <th>channel 1</th>
+            <td><input id="audf0" /></td>
+            <td><input id="audc0" /></td>
+        </tr>
+        <tr>
+            <th>channel 2</th>
+            <td><input id="audf1" /></td>
+            <td><input id="audc1" /></td>
+        </tr>
+        <tr>
+            <th>channel 3</th>
+            <td><input id="audf2" /></td>
+            <td><input id="audc2" /></td>
+        </tr>
+        <tr>
+            <th>channel 4</th>
+            <td><input id="audf3" /></td>
+            <td><input id="audc3" /></td>
+        </tr>
+        <tr>
+            <th>AUDCTL</th>
+            <td><input id="audctl" /></td>
+        </tr>
+    </table>
+</body>
+
+</html>
